@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aptitude - Online Examination</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to left, #332c1b, #807a69);
+      color: #2c3e50;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #b9770e;
+    }
+
+    .question-block {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: #fef9e7;
+      border-left: 6px solid #f39c12;
+      border-radius: 8px;
+    }
+
+    .question-block p {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .option {
+      margin: 6px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      background: #3b3833;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: #d68910;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      text-align: center;
+      padding: 15px;
+      background-color: #fcf3cf;
+      border: 2px solid #f7dc6f;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .correct {
+      color: green;
+      font-weight: bold;
+    }
+
+    .wrong {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Aptitude - Online Examination</h2>
+
+    <form id="examForm">
+      <div id="questionsContainer"></div>
+      <button type="submit" class="submit-btn">Submit Answers</button>
+    </form>
+
+    <div id="resultBox"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        type: "mcq",
+        question: "1. A train 100 meters long is running at 60 km/h. How much time will it take to cross a man standing on the platform?",
+        options: ["6 sec", "10 sec", "5 sec", "8 sec"],
+        correctAnswer: "6 sec"
+      },
+      {
+        type: "mcq",
+        question: "2. What is the next number in the sequence: 2, 4, 8, 16, ?",
+        options: ["18", "24", "32", "30"],
+        correctAnswer: "32"
+      },
+      {
+        type: "msq",
+        question: "3. Which of the following are prime numbers?",
+        options: ["2", "9", "11", "15"],
+        correctAnswers: ["2", "11"]
+      },
+      {
+        type: "msq",
+        question: "4. Choose numbers divisible by 3:",
+        options: ["12", "20", "33", "41"],
+        correctAnswers: ["12", "33"]
+      }
+    ];
+
+    const container = document.getElementById("questionsContainer");
+
+    // Render questions
+    questions.forEach((q, index) => {
+      const block = document.createElement("div");
+      block.className = "question-block";
+
+      let optionsHTML = "";
+
+      if (q.type === "mcq") {
+        q.options.forEach(opt => {
+          optionsHTML += `
+            <div class="option">
+              <input type="radio" name="q${index}" value="${opt}" required>
+              <label>${opt}</label>
+            </div>`;
+        });
+      } else if (q.type === "msq") {
+        q.options.forEach(opt => {
+          optionsHTML += `
+            <div class="option">
+              <input type="checkbox" name="q${index}" value="${opt}">
+              <label>${opt}</label>
+            </div>`;
+        });
+      }
+
+      block.innerHTML = `
+        <p>${q.question}</p>
+        ${optionsHTML}
+      `;
+
+      container.appendChild(block);
+    });
+
+    // Handle submission
+    document.getElementById("examForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let score = 0;
+      const resultBox = document.getElementById("resultBox");
+      resultBox.innerHTML = "";
+
+      questions.forEach((q, index) => {
+        const inputs = document.querySelectorAll(`input[name="q${index}"]`);
+        const selected = [];
+
+        inputs.forEach(input => {
+          if (input.checked) {
+            selected.push(input.value);
+          }
+          input.disabled = true;
+        });
+
+        const correct = q.type === "mcq" ? [q.correctAnswer] : q.correctAnswers;
+        const isCorrect = JSON.stringify([...selected].sort()) === JSON.stringify([...correct].sort());
+
+        const resultP = document.createElement("p");
+        resultP.innerHTML = `<strong>Q${index + 1}:</strong> ${isCorrect ? 
+          '<span class="correct">Correct</span>' : 
+          `<span class="wrong">Incorrect</span> — Correct Answer: ${correct.join(", ")}`}`;
+
+        resultBox.appendChild(resultP);
+        if (isCorrect) score++;
+      });
+
+      const finalScore = document.createElement("div");
+      finalScore.className = "result";
+      finalScore.textContent = `You scored ${score} out of ${questions.length}`;
+      resultBox.appendChild(finalScore);
+
+      document.querySelector(".submit-btn").disabled = true;
+    });
+  </script>
+
+</body>
+</html>

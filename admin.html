@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Online Examination System</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #003744;
+      color: #fff;
+    }
+
+    header {
+      background-color: #00252f;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #7ce5e5;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    nav ul li a:hover {
+      color: #ffd369;
+    }
+
+    main {
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #00677c;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      background-color: #008fa5;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #e0e0e0;
+    }
+
+    .logout {
+      background-color: #ffd369;
+      padding: 8px 16px;
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .logout:hover {
+      background-color: #ffb833;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Admin Panel</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Manage Tests</a></li>
+      <li><a href="#">View Results</a></li>
+      <li><a href="#">User Management</a></li>
+      <li><a href="login.html" class="logout">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <h1>Welcome, Admin!</h1>
+  <div class="card-container">
+    <div class="card">
+      <h2>➕ Create New Test</h2>
+      <p>Add new tests, quizzes, or exams for students.</p>
+    </div>
+    <div class="card">
+      <h2>📄 Manage Questions</h2>
+      <p>Add, edit, or delete exam questions.</p>
+    </div>
+    <div class="card">
+      <h2>👥 Manage Users</h2>
+      <p>View and control registered students and teachers.</p>
+    </div>
+    <div class="card">
+      <h2>📊 View Reports</h2>
+      <p>Check student scores and analytics.</p>
+    </div>
+    <div class="card">
+      <h2>⚙ Settings</h2>
+      <p>Change system preferences and security options.</p>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

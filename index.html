@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Examination System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-color: #003744;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #003744;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #7ce5e5;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      position: relative;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: #000000;
+    }
+
+    .header-buttons a {
+      margin-left: 12px;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .login-btn {
+      border: 1px solid #ffffff;
+      color: #ffffff;
+    }
+
+    .signup-btn {
+      background-color: #ffd369;
+      color: #000000;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 60px 40px;
+      background-color: #00677c;
+    }
+
+    .hero-text {
+      max-width: 520px;
+    }
+
+    .hero-text h1 {
+      font-size: 38px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .hero-text h1 span {
+      color: #00f2fe;
+    }
+
+    .hero-text p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .hero-text button {
+      padding: 10px 20px;
+      background-color: #ffd369;
+      color: #000000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      width: 450px;
+      margin-top: 20px;
+    }
+
+    .test-access {
+      background-color: #f3cccc;
+      padding: 40px 20px;
+      text-align: center;
+      color: #000000;
+    }
+
+    .test-access h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .test-access p {
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .test-access input {
+      padding: 10px;
+      font-size: 15px;
+      width: 240px;
+      border: 1px solid #3b1f1f;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+
+    .test-access button {
+      padding: 10px 18px;
+      background-color: #ffffff;
+      color: rgb(112, 112, 112);
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .bottom-section {
+      background-color: #ebe7e7;
+      color: #003744;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .bottom-section h2 {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Dropdown styles */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      background-color: rgb(255, 255, 255);
+      color: rgb(24, 21, 21);
+      width: 700px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: none;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .dropdown-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .dropdown-item {
+      width: 280px;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .dropdown-item i {
+      font-size: 20px;
+      color: #00bcd4;
+    }
+
+    .dropdown-item div span {
+      font-weight: bold;
+    }
+
+    nav ul li:hover .dropdown-content {
+      display: flex;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text {
+        max-width: 100%;
+      }
+
+      .hero-image img {
+        width: 100%;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0;
+      }
+
+      .header-buttons {
+        margin-top: 10px;
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: static;
+        flex-direction: column;
+      }
+
+      .dropdown-item {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Online Examination System</div>
+    <nav>
+      <ul>
+        <li>
+          <a href="#">Product</a>
+          <div class="dropdown-content">
+            <div class="dropdown-grid">
+              <div class="dropdown-item">
+                <i>📘</i>
+                <div>
+                  <span>Skills and Knowledge Assessment</span><br />
+                  Make online tests, quizzes and exams
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <i>🤖</i>
+                <div>
+                  <span>AI Question Generator</span><br />
+                  Be inspired by AI-generated questions
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <i>📊</i>
+                <div>
+                  <span>Insights & Analytics</span><br />
+                  Real-time comprehensive analysis
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <i>🎓</i>
+                <div>
+                  <span>Feedback & Grades</span><br />
+                  Automated feedback and grading
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <i>🔒</i>
+                <div>
+                  <span>Proctoring & Security</span><br />
+                  Reliable results every time
+                </div>
+              </div>
+              <div class="dropdown-item">
+                <i>🧾</i>
+                <div>
+                  <span>Certificates</span><br />
+                  Create your own assessment certificates
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+          
+      <li>
+  <a href="subject_selector.html">Assessment</a>
+  </li>
+
+        <li>
+  <a href="#">Use cases</a>
+  <div class="dropdown-content">
+    <div class="dropdown-grid">
+      <div>
+        <h4 style="color: #00c897; font-size: 14px; margin-bottom: 10px;">BUSINESS</h4>
+        <div class="dropdown-item">
+          <div><span>Recruitment</span><br />Make better hiring decisions</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Employee Assessments</span><br />Elevate your training and assessments</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Training</span><br />Implement meaningful training that makes an impact</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Sales Training</span><br />Improve the efficiency of your sales team</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Customer Service</span><br />Maintain high customer service standards</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Safety Procedures</span><br />Elevate workplace health & safety awareness</div>
+        </div>
+      </div>
+      <div>
+        <h4 style="color: #c59fff; font-size: 14px; margin-bottom: 10px;">EDUCATION</h4>
+        <div class="dropdown-item">
+          <div><span>Quizzes</span><br />Use online quizzes for superior student engagement</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Exams</span><br />Create streamlined and straightforward exams</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Homework</span><br />Create homework that sparks learning and fun</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Competition</span><br />Stimulate your students with online rivalry</div>
+        </div>
+        <div class="dropdown-item">
+          <div><span>Formative Assessment</span><br />Identify your students’ strengths and weaknesses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+
+        <li>
+  <a href="#">Resources</a>
+  <div class="dropdown-content">
+    <div class="dropdown-grid">
+      <div class="dropdown-item">
+        <i>❤️</i>
+        <div>
+          <span>Customer Stories</span><br />
+          See how we make a difference
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <i>📚</i>
+        <div>
+          <span>Guides</span><br />
+          Comprehensive guidance for all skill levels
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <i>📰</i>
+        <div>
+          <span>Blog</span><br />
+          Trends, insights, and updates
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <i>❓</i>
+        <div>
+          <span>Help Center</span><br />
+          Maximize your Testportal experience
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+
+  <li>
+  <a href="#">Contact Us</a>
+  <div class="dropdown-content">
+    <div class="dropdown-grid">
+      <div class="dropdown-item">
+        <i>📧</i>
+        <div>
+          <span>Email</span><br />
+          krishnakumar200418@gmail.com
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <i>📞</i>
+        <div>
+          <span>Phone</span><br />
+          +91-6382922641
+        </div>
+      </div>
+    </div>
+  </div>
+</li>
+<li>
+  <a href="admin.html">Admin</a>
+</li>
+
+
+
+      </ul>
+    </nav>
+    <div class="header-buttons">
+      <a href="login.html" class="login-btn">Login</a>
+      <a href="sign up.html" class="signup-btn">Sign up</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Turn your <span>exams</span> into success stories</h1>
+      <p>An online examination system is a secure platform for conducting, evaluating, and managing tests digitally.</p>
+      <a href="sign up.html"><button>Sign up – it's free</button></a>
+      <p style="font-size: 12px; margin-top: 10px;"></p>
+    </div>
+  </section>
+
+  <section class="test-access">
+    <h2>Here to take a test?</h2>
+    <input type="text" placeholder="Enter the access code" />
+    <button>Start your test</button>
+  </section>
+
+  <section class="bottom-section">
+    <h2>Create online <span style="color:#81b1b7">tests, quizzes, and exams</span></h2>
+  </section>
+
+</body>
+</html>
